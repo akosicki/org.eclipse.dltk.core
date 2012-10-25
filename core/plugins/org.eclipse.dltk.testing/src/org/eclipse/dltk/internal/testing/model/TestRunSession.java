@@ -503,50 +503,8 @@ public class TestRunSession implements ITestRunSession, ITestSession {
 		return fIsRunning;
 	}
 	
-	/**
-	 * @param testId 
-	 * @param className 
-	 * @param testName 
-	 * @param launchMode 
-	 * @return <code>false</code> iff the rerun could not be started
-	 * @throws CoreException 
-	 */
-	public boolean rerunTest(ITestElement testElement, String launchMode) throws CoreException {
-		if (isKeptAlive()) {
-			Status status= ((TestCaseElement) getTestElement(testElement.getId())).getStatus();
-			if (status == Status.ERROR) {
-				fErrorCount--;
-			} else if (status == Status.FAILURE) {
-				fFailureCount--;
-			}
-			/* TODO fTestRunnerClient.rerunTest(testId, className, testName); */
-			return true;
-			
-		} else if (fLaunch != null) {
-			// run the selected test using the previous launch configuration
-			ILaunchConfiguration launchConfiguration= fLaunch.getLaunchConfiguration();
-			if (launchConfiguration != null) {
-
-				//String name= className;
-				//if (testName != null) 
-					//name+= "."+testName; //$NON-NLS-1$
-				//String configName= Messages.format(DLTKTestingMessages.TestRunnerViewPart_configName, name); 
-				//ILaunchConfigurationWorkingCopy tmp= launchConfiguration.copy(configName); 
-				// fix for bug: 64838  junit view run single test does not use correct class [JUnit] 
-//				tmp.setAttribute(ScriptLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, className);
-				// reset the container
-				//tmp.setAttribute(DLTKTestingConstants.ATTR_TEST_CONTAINER, ""); //$NON-NLS-1$
-				//if (testName != null) {
-					//tmp.setAttribute(DLTKTestingConstants.ATTR_TEST_METHOD_NAME, testName);
-					//	String args= "-rerun "+testId;
-					//	tmp.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROGRAM_ARGUMENTS, args);
-				//}
-				//tmp.launch(launchMode, null);	
-				return true;
-			}
-		}
-		
-		return false;
+	public void rerunTest(ITestElement testElement, String launchMode) throws CoreException {
+		fTestRunnerClient.rerunTest(testElement, launchMode);
 	}
 	
 	public TestElement getTestElement(String id) {

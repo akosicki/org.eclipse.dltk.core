@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.dltk.internal.testing.model;
 
+import org.eclipse.dltk.testing.model.ITestElement;
+
 public interface ITestRunnerClient {
 
 	/**
@@ -34,8 +36,18 @@ public interface ITestRunnerClient {
 	 * @param testId
 	 * @param className
 	 * @param testName
+	 *
+	 * @deprecated please use the {@link ITestRunnerClient#rerunTest(ITestElement, String)} instead
 	 */
+	@Deprecated
 	void rerunTest(String testId, String className, String testName);
+
+	/**
+	 * Advise this client to rerun the selected test element.
+	 * 
+	 * @param element
+	 */
+	void rerunTest(ITestElement element, String launchMode);
 
 	/**
 	 * @param listeners

@@ -1896,23 +1896,7 @@ public class TestRunnerViewPart extends ViewPart {
 	public void rerunTest(ITestElement testElement, String launchMode) {
 		DebugUITools.saveAndBuildBeforeLaunch();
 		try {
-			boolean couldLaunch = fTestRunSession.rerunTest(testElement,
-					launchMode);
-			if (!couldLaunch) {
-				MessageDialog
-						.openInformation(
-								getSite().getShell(),
-								DLTKTestingMessages.TestRunnerViewPart_cannotrerun_title,
-								DLTKTestingMessages.TestRunnerViewPart_cannotrerurn_message);
-			} else if (fTestRunSession.isKeptAlive()) {
-				TestCaseElement testCaseElement = (TestCaseElement) fTestRunSession
-						.getTestElement(testElement.getId());
-				testCaseElement.setStatus(TestElement.Status.RUNNING, null,
-						null, null);
-				fTestViewer.registerViewerUpdate(testCaseElement);
-				postSyncProcessChanges();
-			}
-
+			fTestRunSession.rerunTest(testElement, launchMode);
 		} catch (CoreException e) {
 			ErrorDialog.openError(getSite().getShell(),
 					DLTKTestingMessages.TestRunnerViewPart_error_cannotrerun, e

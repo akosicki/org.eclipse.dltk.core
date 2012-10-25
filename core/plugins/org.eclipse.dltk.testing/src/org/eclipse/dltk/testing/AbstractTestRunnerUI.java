@@ -80,18 +80,9 @@ public abstract class AbstractTestRunnerUI implements ITestRunnerUI {
 	}
 
 	/*
-	 * @see ITestRunnerUI#canRerun(ITestElement)
+	 * @see ITestRunnerUI#canRerun(ITestElement, launchMode)
 	 */
-	public boolean canRerun(ITestElement testElement) {
-		// IScriptProject project = fTestRunnerPart.getLaunchedProject();
-		// if (project == null)
-		// return false;
-		// try {
-		// IType type = project.findType(className);
-		// return type != null;
-		// } catch (ModelException e) {
-		// // fall through
-		// }
+	public boolean canRerun(ITestElement testElement, String launchMode) {
 		return false;
 	}
 

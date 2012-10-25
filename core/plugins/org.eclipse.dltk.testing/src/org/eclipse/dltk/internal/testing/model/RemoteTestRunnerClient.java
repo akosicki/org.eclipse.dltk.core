@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.dltk.testing.DLTKTestingPlugin;
 import org.eclipse.dltk.testing.ITestingClient;
 import org.eclipse.dltk.testing.MessageIds;
+import org.eclipse.dltk.testing.model.ITestElement;
 
 /**
  * The client side of the RemoteTestRunner. Handles the
@@ -473,6 +474,7 @@ public class RemoteTestRunnerClient implements ITestingClient, ITestRunnerClient
 		}
 	}
 
+	@Deprecated
 	public void rerunTest(String testId, String className, String testName) {
 //		if (isRunning()) {
 //			fActualResult.setLength(0);
@@ -480,6 +482,10 @@ public class RemoteTestRunnerClient implements ITestingClient, ITestRunnerClient
 //			fWriter.println(MessageIds.TEST_RERUN+testId+" "+className+" "+testName); //$NON-NLS-1$ //$NON-NLS-2$
 //			fWriter.flush();
 //		}
+	}
+
+	public void rerunTest(ITestElement element, String launchMode) {
+		// TODO Auto-generated method stub
 	}
 
 	public void stopWaiting() {

@@ -226,16 +226,21 @@ public class TestViewer {
 			if (testElement instanceof TestSuiteElement) {
 				manager.add(new OpenTestAction(fTestRunnerPart, testElement));
 				manager.add(new Separator());
-				if (fTestRunSession.getTestRunnerUI().canRerun(testElement)
-						&& !fTestRunnerPart.lastLaunchIsKeptAlive()) {
-					manager.add(new RerunAction(
-							DLTKTestingMessages.RerunAction_label_run,
-							fTestRunnerPart, testElement,
-							ILaunchManager.RUN_MODE));
-					manager.add(new RerunAction(
-							DLTKTestingMessages.RerunAction_label_debug,
-							fTestRunnerPart, testElement,
-							ILaunchManager.DEBUG_MODE));
+				if (!fTestRunnerPart.lastLaunchIsKeptAlive()) {
+					if (fTestRunSession.getTestRunnerUI().canRerun(testElement, ILaunchManager.RUN_MODE)) {
+						manager.add(new RerunAction(
+								DLTKTestingMessages.RerunAction_label_run,
+								fTestRunnerPart, testElement,
+								ILaunchManager.RUN_MODE));
+					}
+
+					if (fTestRunSession.getTestRunnerUI().canRerun(
+							testElement, ILaunchManager.DEBUG_MODE)) {
+						manager.add(new RerunAction(
+								DLTKTestingMessages.RerunAction_label_debug,
+								fTestRunnerPart, testElement,
+								ILaunchManager.DEBUG_MODE));
+					}
 				}
 			} else {
 				manager.add(new OpenTestAction(fTestRunnerPart, testElement));
@@ -245,16 +250,20 @@ public class TestViewer {
 							DLTKTestingMessages.RerunAction_label_rerun,
 							fTestRunnerPart, testElement,
 							ILaunchManager.RUN_MODE));
-				} else if (fTestRunSession.getTestRunnerUI().canRerun(
-						testElement)) {
-					manager.add(new RerunAction(
-							DLTKTestingMessages.RerunAction_label_run,
-							fTestRunnerPart, testElement,
-							ILaunchManager.RUN_MODE));
-					manager.add(new RerunAction(
-							DLTKTestingMessages.RerunAction_label_debug,
-							fTestRunnerPart, testElement,
-							ILaunchManager.DEBUG_MODE));
+				} else {
+					if (fTestRunSession.getTestRunnerUI().canRerun(testElement, ILaunchManager.RUN_MODE)) {
+						manager.add(new RerunAction(
+								DLTKTestingMessages.RerunAction_label_run,
+								fTestRunnerPart, testElement,
+								ILaunchManager.RUN_MODE));
+					}
+					if (fTestRunSession.getTestRunnerUI().canRerun(
+							testElement, ILaunchManager.DEBUG_MODE)) {
+						manager.add(new RerunAction(
+								DLTKTestingMessages.RerunAction_label_debug,
+								fTestRunnerPart, testElement,
+								ILaunchManager.DEBUG_MODE));
+					}
 				}
 			}
 			if (fLayoutMode == TestRunnerViewPart.LAYOUT_HIERARCHICAL) {

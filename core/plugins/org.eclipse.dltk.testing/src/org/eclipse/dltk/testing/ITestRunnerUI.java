@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.dltk.core.IScriptProject;
 import org.eclipse.dltk.internal.testing.launcher.NullTestRunnerUI;
+import org.eclipse.dltk.internal.testing.model.TestElement;
 import org.eclipse.dltk.testing.model.ITestCaseElement;
 import org.eclipse.dltk.testing.model.ITestElement;
 import org.eclipse.dltk.testing.model.ITestRunSession;
@@ -68,9 +69,10 @@ public interface ITestRunnerUI extends IAdaptable {
 
 	/**
 	 * @param testElement
+	 * @param launchMode
 	 * @return
 	 */
-	boolean canRerun(ITestElement testElement);
+	boolean canRerun(ITestElement testElement, String launchMode);
 
 	/**
 	 * Tests that this testing engine can filter the stack.
